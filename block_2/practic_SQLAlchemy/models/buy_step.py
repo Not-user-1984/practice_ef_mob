@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, ForeignKey, Date
-from base import Base
+from .base import Base
 
 
 class BuyStep(Base):

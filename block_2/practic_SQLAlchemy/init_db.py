@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from conf import DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASS
+import generate_data
+from conf import DATABASE_URL
 from models.base import Base
 from models.genre import Genre
 from models.author import Author
@@ -11,11 +12,26 @@ from models.buy import Buy
 from models.step import Step
 from models.buy_step import BuyStep
 
+
 # Создаем подключение к базе данных
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 engine = create_engine(DATABASE_URL)
 
-# Создаем все таблицы
-Base.metadata.create_all(engine)
 
-print("База данных и таблицы успешно созданы!")
+def drop_all_tables():
+    Base.metadata.drop_all(engine)
+    print("Все таблицы удалены.")
+
+
+def init_db():
+    Base.metadata.create_all(engine)
+    print("База данных и таблицы успешно созданы!")
+
+
+# Основной скрипт
+if __name__ == "__main__":
+    print("Начинаем настройку базы данных...")
+    drop_all_tables()
+    init_db()
+    print("Данные успешно сгенерированы и добавлены в базу данных!")
+    generate_data.run()
+    print("Настройка базы данных завершена.")
