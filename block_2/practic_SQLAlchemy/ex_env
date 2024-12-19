@@ -1,9 +1,0 @@
-DB_NAME=bookstore
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASS=postgres
-
-PGADMIN_DEFAULT_EMAIL=admin@example.com
-PGADMIN_DEFAULT_PASSWORD=admin
-PGADMIN_PORT=5050
